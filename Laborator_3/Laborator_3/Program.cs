@@ -4,55 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Laborator_3
+namespace Laborator3
 {
-    class Program { 
-
-private static void ex1()
-        {
-
-            //f(i,j) = |v[i] - v[j]| + |i - j|
-            Console.Write("n=");
-            int n = int.Parse(Console.ReadLine());
-            int[] v = new int[n];
-
-            Console.Write("Array:");
-            for (int i = 0; i < v.Length; i++)
-            {
-                Console.Write($"v[{i}]=");
-                v[i] = int.Parse(Console.ReadLine());
-            }
-
-            for (int i = 0; i < v.Length; i++)
-            {
-                Console.Write($"{v[i]} ");
-            }
-            int max = 0; //cea mai mica valoare este 0
-
-            for (int i = 0; i < v.Length; i++)
-            {
-                for (int j = i + 1; j < v.Length; j++)
-                {
-                    int aux = f(v, i, j);
-                    if (aux > max)
-                    {
-                        max = aux;
-                    }
-
-                }
-            }
-            Console.WriteLine($"\n Maximul este: {max}");
-
-        }
-
-        private static int f(int[] v, int i, int j)
-        {
-            return Math.Abs(v[i] - v[j]) + Math.Abs(i - j);
-        }
+    class Program
+    {
         static void Main(string[] args)
         {
-            ex1();
+            NumeleTransformate();
+        }
+
+        private static void NumeleTransformate()
+        {
+            string name = "BitStone";
+            Console.WriteLine(name);
+            reverse(name);
+        }
+
+        static void reverse(string name)
+        {
+            int count = 1, k = 0;
+
+            List<int> list = new List<int>();
+
+            for (int i = 1; i < name.Length; i++)
+            {
+                if (char.IsUpper(name[i]))
+                {
+                    list.Add(count);
+                    count = 1;
+                }
+                else
+                {
+                    count++;
+                }
+            }
+            list.Add(count);
+
+            char[] v = name.ToCharArray();
+            Array.Reverse(v);
+
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                v[k] = char.ToUpper(v[k]);
+                k++;
+                for (int j = 1; j < list[i]; j++)
+                {
+                    v[k] = char.ToLower(v[k]);
+                    k++;
+                }
+            }
+
+            for (int i = 0; i < v.Length; i++)
+            {
+                Console.Write(v[i]);
+            }
+            Console.WriteLine();
         }
     }
 }
-
